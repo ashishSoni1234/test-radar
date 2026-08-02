@@ -27,4 +27,6 @@ class ProjectView(TemplateView):
         context['agents'] = Agent.objects.filter(project=project).select_related('token')
         context['sessions'] = TestSession.objects.filter(project=project)
         context['agent_form'] = AgentForm()
+        context['new_token'] = self.request.session.pop('new_token', None)
+        context['new_agent_name'] = self.request.session.pop('new_agent_name', None)
         return context
